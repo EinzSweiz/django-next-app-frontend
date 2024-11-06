@@ -1,5 +1,9 @@
 import localFont from "next/font/local";
+import { AuthProvider } from "@/components/authProvider";
+import { ThemeProvider } from "@/components/themeProvider";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+import BaseLayout from "@/components/layout/BaseLayout";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -19,11 +23,21 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased"
+        )}
+      > 
+        <ThemeProvider         
+        attribute="class"
+        defaultTheme="system">
+        <AuthProvider>
+          <BaseLayout className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col bg-muted/40">
+          {children}
+          </BaseLayout>
+        </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
