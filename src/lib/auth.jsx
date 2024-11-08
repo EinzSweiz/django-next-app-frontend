@@ -24,7 +24,7 @@ export async function setToken(authToken) {
         sameSite: "strict",
         secure: process.env.NODE_ENV !== 'development',
         maxAge: 3600,
-    })
+    });
 }
 
 
@@ -36,10 +36,10 @@ export async function setRefreshToken(authRefreshToken) {
         sameSite: "strict",
         secure: process.env.NODE_ENV !== 'development',
         maxAge: 3600,
-    })
+    });
 }
 
 export async function deleteToken() {
     await cookies().delete(TOKEN_REFRESH_TOKEN)
-    return await cookies().delete(TOKEN_NAME)
+    return await cookies().delete(TOKEN_NAME);
 }

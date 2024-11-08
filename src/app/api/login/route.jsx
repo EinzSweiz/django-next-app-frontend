@@ -21,10 +21,10 @@ export async function POST(request) {
 
     // Check if login was successful
     if (response.ok) {
-        const { access, refresh } = responseData;
+        const { username, access, refresh } = responseData;
         setToken(access);
         setRefreshToken(refresh);
-        return NextResponse.json({"loggedIn": true}, {status: 200})
+        return NextResponse.json({"loggedIn": true, "username": username}, {status: 200})
     }
 
     // Return the response with the tokens

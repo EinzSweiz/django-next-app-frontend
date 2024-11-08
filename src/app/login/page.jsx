@@ -32,14 +32,20 @@ export default function Page() {
     setLoading(true); // Start loading spinner
 
     const response = await fetch(LOGIN_URL, requestOptions);
-    const data = await response.json();
+    let data = {}
+    try{
+      data = await response.json();
+    }
+    catch{
+
+    }
     console.log(data);
 
     if (response.ok) {
       console.log('Logged in!');
       setLoading(false); // Stop loading spinner
       setSuccess(true);  // Show success state
-      auth.login()
+      auth.login(data?.username)
       // Redirect after showing success
       setTimeout(() => {
       }, 2000); // Give it 2 seconds before redirecting
